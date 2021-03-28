@@ -10,15 +10,15 @@
     
 
     <meta name="author" content="Tc">
-    <meta name="description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt; main() { int money;//定义整型变量 char select; printf(&quot;您投入的金额为(￥):\n&quot;); scanf(&quot;%d&quot;,&amp;money); switch (money)//识别钱数 { case 2://两元 printf(&quot;您投入了2元，您可以选择：\n&quot;); printf(&quot;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&quot;); printf(&quot;请键入您的选择:\n&quot;);//提示输入 fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了NongFu Spring！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了怡宝矿泉水!\n&quot;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&quot;你得到了康师傅矿泉水！\n&quot;); break; default: printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;); break; } break; case 3: printf(&quot;您投入了3元，您可以选择：\n&quot;); printf(&quot;A.Coca Cola\nB.雪碧\nC.果粒橙\n&quot;); printf(&quot;请键入您的选择:\n&quot;); fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了Coca Cola！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了雪碧!">
+    <meta name="description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt;main() { int money;//定义整型变量 	char select; printf(&#34;您投入的金额为(￥):\n&#34;); scanf(&#34;%d&#34;,&amp;money); switch (money)//识别钱数 	{ case 2://两元 	printf(&#34;您投入了2元，您可以选择：\n&#34;); printf(&#34;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&#34;); printf(&#34;请键入您的选择:\n&#34;);//提示输入 	fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了NongFu Spring！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了怡宝矿泉水!\n&#34;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&#34;你得到了康师傅矿泉水！\n&#34;); break; default: printf(&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&#34;); break; } break; case 3: printf(&#34;您投入了3元，您可以选择：\n&#34;); printf(&#34;A.Coca Cola\nB.雪碧\nC.果粒橙\n&#34;); printf(&#34;请键入您的选择:\n&#34;); fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了Coca Cola！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了雪碧!">
     <meta name="keywords" content="blog,developer,personal">
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="第四次上机报告第三题"/>
-<meta name="twitter:description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt; main() { int money;//定义整型变量 char select; printf(&quot;您投入的金额为(￥):\n&quot;); scanf(&quot;%d&quot;,&amp;money); switch (money)//识别钱数 { case 2://两元 printf(&quot;您投入了2元，您可以选择：\n&quot;); printf(&quot;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&quot;); printf(&quot;请键入您的选择:\n&quot;);//提示输入 fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了NongFu Spring！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了怡宝矿泉水!\n&quot;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&quot;你得到了康师傅矿泉水！\n&quot;); break; default: printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;); break; } break; case 3: printf(&quot;您投入了3元，您可以选择：\n&quot;); printf(&quot;A.Coca Cola\nB.雪碧\nC.果粒橙\n&quot;); printf(&quot;请键入您的选择:\n&quot;); fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了Coca Cola！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了雪碧!"/>
+<meta name="twitter:description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt;main() { int money;//定义整型变量 	char select; printf(&#34;您投入的金额为(￥):\n&#34;); scanf(&#34;%d&#34;,&amp;money); switch (money)//识别钱数 	{ case 2://两元 	printf(&#34;您投入了2元，您可以选择：\n&#34;); printf(&#34;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&#34;); printf(&#34;请键入您的选择:\n&#34;);//提示输入 	fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了NongFu Spring！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了怡宝矿泉水!\n&#34;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&#34;你得到了康师傅矿泉水！\n&#34;); break; default: printf(&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&#34;); break; } break; case 3: printf(&#34;您投入了3元，您可以选择：\n&#34;); printf(&#34;A.Coca Cola\nB.雪碧\nC.果粒橙\n&#34;); printf(&#34;请键入您的选择:\n&#34;); fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了Coca Cola！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了雪碧!"/>
 
     <meta property="og:title" content="第四次上机报告第三题" />
-<meta property="og:description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt; main() { int money;//定义整型变量 char select; printf(&quot;您投入的金额为(￥):\n&quot;); scanf(&quot;%d&quot;,&amp;money); switch (money)//识别钱数 { case 2://两元 printf(&quot;您投入了2元，您可以选择：\n&quot;); printf(&quot;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&quot;); printf(&quot;请键入您的选择:\n&quot;);//提示输入 fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了NongFu Spring！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了怡宝矿泉水!\n&quot;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&quot;你得到了康师傅矿泉水！\n&quot;); break; default: printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;); break; } break; case 3: printf(&quot;您投入了3元，您可以选择：\n&quot;); printf(&quot;A.Coca Cola\nB.雪碧\nC.果粒橙\n&quot;); printf(&quot;请键入您的选择:\n&quot;); fflush(stdin); select = getchar(); printf(&quot;您的选择为：%c\n&quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&quot;你得到了Coca Cola！\n&quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&quot;你得到了雪碧!" />
+<meta property="og:description" content="第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&quot;农夫山泉&quot;、&ldquo;怡宝矿泉水&quot;和&quot;康师傅矿泉水&quot;之一，投入3元可以选择&quot;可口可乐”、&ldquo;雪碧&quot;和&quot;果粒橙&quot;之一，投入5元可以选择&quot;奶荼&rdquo;、&ldquo;咖啡&quot;和&quot;酸奶&quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&lt;stdio.h&gt;main() { int money;//定义整型变量 	char select; printf(&#34;您投入的金额为(￥):\n&#34;); scanf(&#34;%d&#34;,&amp;money); switch (money)//识别钱数 	{ case 2://两元 	printf(&#34;您投入了2元，您可以选择：\n&#34;); printf(&#34;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&#34;); printf(&#34;请键入您的选择:\n&#34;);//提示输入 	fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了NongFu Spring！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了怡宝矿泉水!\n&#34;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&#34;你得到了康师傅矿泉水！\n&#34;); break; default: printf(&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&#34;); break; } break; case 3: printf(&#34;您投入了3元，您可以选择：\n&#34;); printf(&#34;A.Coca Cola\nB.雪碧\nC.果粒橙\n&#34;); printf(&#34;请键入您的选择:\n&#34;); fflush(stdin); select = getchar(); printf(&#34;您的选择为：%c\n&#34;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&#34;你得到了Coca Cola！\n&#34;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&#34;你得到了雪碧!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://xiaotian1339.github.io/posts/fourth-c3/" />
 <meta property="article:published_time" content="2021-03-27T23:07:27-04:00" />
@@ -167,102 +167,102 @@
   </a>
 </h4>
 <hr>
-<pre><code>//自动售货机
-#include&lt;stdio.h&gt;
-main()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">//自动售货机
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>main()
 {
-	int money;//定义整型变量
-	char select;
-	printf(&quot;您投入的金额为(￥):\n&quot;);
-	scanf(&quot;%d&quot;,&amp;money);
-	switch (money)//识别钱数
-	{
-	case 2://两元
-		printf(&quot;您投入了2元，您可以选择：\n&quot;);
-		printf(&quot;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&quot;);
-		printf(&quot;请键入您的选择:\n&quot;);//提示输入
-		fflush(stdin);
-		select = getchar();
-		printf(&quot;您的选择为：%c\n&quot;,select);
-			switch (select)
+	<span style="color:#66d9ef">int</span> money;<span style="color:#75715e">//定义整型变量
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">char</span> select;
+	printf(<span style="color:#e6db74">&#34;您投入的金额为(￥):</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+	scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>money);
+	<span style="color:#66d9ef">switch</span> (money)<span style="color:#75715e">//识别钱数
+</span><span style="color:#75715e"></span>	{
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#75715e">//两元
+</span><span style="color:#75715e"></span>		printf(<span style="color:#e6db74">&#34;您投入了2元，您可以选择：</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;A.农夫山泉</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">B.怡宝矿泉水</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">C.康师傅矿泉水</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;请键入您的选择:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);<span style="color:#75715e">//提示输入
+</span><span style="color:#75715e"></span>		fflush(stdin);
+		select <span style="color:#f92672">=</span> getchar();
+		printf(<span style="color:#e6db74">&#34;您的选择为：%c</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,select);
+			<span style="color:#66d9ef">switch</span> (select)
 			{
-			case'a':
-			case'A':
-				printf(&quot;你得到了NongFu Spring！\n&quot;);
-				break;
-			case'b':
-			case'B':
-				printf(&quot;你得到了怡宝矿泉水!\n&quot;);
-				break;
-			case'c':
-			case'C':
-				printf(&quot;你得到了康师傅矿泉水！\n&quot;);
-				break;
-			default:
-				printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;);
-				break;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了NongFu Spring！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;b&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;B&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了怡宝矿泉水!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了康师傅矿泉水！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
 			}
-			break;
-	case 3:
-		printf(&quot;您投入了3元，您可以选择：\n&quot;);
-		printf(&quot;A.Coca Cola\nB.雪碧\nC.果粒橙\n&quot;);
-		printf(&quot;请键入您的选择:\n&quot;);
+			<span style="color:#66d9ef">break</span>;
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span>
+		printf(<span style="color:#e6db74">&#34;您投入了3元，您可以选择：</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;A.Coca Cola</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">B.雪碧</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">C.果粒橙</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;请键入您的选择:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 		fflush(stdin);
-		select = getchar();
-		printf(&quot;您的选择为：%c\n&quot;,select);
-			switch (select)
+		select <span style="color:#f92672">=</span> getchar();
+		printf(<span style="color:#e6db74">&#34;您的选择为：%c</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,select);
+			<span style="color:#66d9ef">switch</span> (select)
 			{
-			case'a':
-			case'A':
-				printf(&quot;你得到了Coca Cola！\n&quot;);
-				break;
-			case'b':
-			case'B':
-				printf(&quot;你得到了雪碧!\n&quot;);
-				break;
-			case'c':
-			case'C':
-				printf(&quot;你得到了果粒橙！\n&quot;);
-				break;
-			default:
-				printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;);
-				break;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了Coca Cola！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;b&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;B&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了雪碧!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了果粒橙！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
 		   	}
-			break;
-	case 5:
-		printf(&quot;您投入了5元，您可以选择：\n&quot;);
-		printf(&quot;A.奶茶\nB.咖啡\nC.酸奶\n&quot;);
-		printf(&quot;请键入您的选择:\n&quot;);
+			<span style="color:#66d9ef">break</span>;
+	<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">:</span>
+		printf(<span style="color:#e6db74">&#34;您投入了5元，您可以选择：</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;A.奶茶</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">B.咖啡</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">C.酸奶</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		printf(<span style="color:#e6db74">&#34;请键入您的选择:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 		fflush(stdin);
-		select = getchar();
-		printf(&quot;您的选择为：%c\n&quot;,select);
-			switch (select)
+		select <span style="color:#f92672">=</span> getchar();
+		printf(<span style="color:#e6db74">&#34;您的选择为：%c</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,select);
+			<span style="color:#66d9ef">switch</span> (select)
 			{
-			case'a':
-			case'A':
-				printf(&quot;你得到了奶茶！\n&quot;);
-				break;
-			case'b':
-			case'B':
-				printf(&quot;你得到了咖啡!\n&quot;);
-				break;
-			case'c':
-			case'C':
-				printf(&quot;你得到了酸奶！\n&quot;);
-				break;
-			default:
-				printf(&quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&quot;);
-				break;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了奶茶！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;b&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;B&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了咖啡!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;c&#39;</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">case</span><span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你得到了酸奶！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
+			<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+				printf(<span style="color:#e6db74">&#34;你的选择错误，作为惩罚，机器吞币，请重新投币！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+				<span style="color:#66d9ef">break</span>;
 			}
-			break;
-	default:
-		printf(&quot;本机器只识别2，3，5元，请重新投币！\n&quot;);
-		break;
+			<span style="color:#66d9ef">break</span>;
+	<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+		printf(<span style="color:#e6db74">&#34;本机器只识别2，3，5元，请重新投币！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+		<span style="color:#66d9ef">break</span>;
 	}
-	printf(&quot;欢迎下次光临本售货机，拜拜！\n&quot;);
+	printf(<span style="color:#e6db74">&#34;欢迎下次光临本售货机，拜拜！</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 }
 
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="调试结果1image41png-调试结果1">
   ！<a href="/image/4.1.png" title="调试结果1">调试结果1</a>
   <a class="heading-link" href="#%e8%b0%83%e8%af%95%e7%bb%93%e6%9e%9c1image41png-%e8%b0%83%e8%af%95%e7%bb%93%e6%9e%9c1">
