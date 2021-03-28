@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 27 Mar 2021 23:07:27 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>https://xiaotian1339.github.io/posts/%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%E6%8A%A5%E5%91%8A/</link>
+      <link>https://xiaotian1339.github.io/posts/fourth-c3/</link>
       <pubDate>Sat, 27 Mar 2021 23:07:27 -0400</pubDate>
       
-      <guid>https://xiaotian1339.github.io/posts/%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%E6%8A%A5%E5%91%8A/</guid>
+      <guid>https://xiaotian1339.github.io/posts/fourth-c3/</guid>
       <description>第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&amp;quot;农夫山泉&amp;quot;、&amp;ldquo;怡宝矿泉水&amp;quot;和&amp;quot;康师傅矿泉水&amp;quot;之一，投入3元可以选择&amp;quot;可口可乐”、&amp;ldquo;雪碧&amp;quot;和&amp;quot;果粒橙&amp;quot;之一，投入5元可以选择&amp;quot;奶荼&amp;rdquo;、&amp;ldquo;咖啡&amp;quot;和&amp;quot;酸奶&amp;quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&amp;lt;stdio.h&amp;gt; main() { int money;//定义整型变量 char select; printf(&amp;quot;您投入的金额为(￥):\n&amp;quot;); scanf(&amp;quot;%d&amp;quot;,&amp;amp;money); switch (money)//识别钱数 { case 2://两元 printf(&amp;quot;您投入了2元，您可以选择：\n&amp;quot;); printf(&amp;quot;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&amp;quot;); printf(&amp;quot;请键入您的选择:\n&amp;quot;);//提示输入 fflush(stdin); select = getchar(); printf(&amp;quot;您的选择为：%c\n&amp;quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&amp;quot;你得到了NongFu Spring！\n&amp;quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&amp;quot;你得到了怡宝矿泉水!\n&amp;quot;); break; case&#39;c&#39;: case&#39;C&#39;: printf(&amp;quot;你得到了康师傅矿泉水！\n&amp;quot;); break; default: printf(&amp;quot;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&amp;quot;); break; } break; case 3: printf(&amp;quot;您投入了3元，您可以选择：\n&amp;quot;); printf(&amp;quot;A.Coca Cola\nB.雪碧\nC.果粒橙\n&amp;quot;); printf(&amp;quot;请键入您的选择:\n&amp;quot;); fflush(stdin); select = getchar(); printf(&amp;quot;您的选择为：%c\n&amp;quot;,select); switch (select) { case&#39;a&#39;: case&#39;A&#39;: printf(&amp;quot;你得到了Coca Cola！\n&amp;quot;); break; case&#39;b&#39;: case&#39;B&#39;: printf(&amp;quot;你得到了雪碧!</description>
     </item>
     
