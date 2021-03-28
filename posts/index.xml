@@ -6,9 +6,18 @@
     <description>Recent content in Posts on Tcgg&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>Zh-CN</language>
-    <lastBuildDate>Sat, 27 Mar 2021 23:07:27 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 01:55:00 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>第四次上机报告第一题</title>
+      <link>https://xiaotian1339.github.io/posts/thefourth/1/</link>
+      <pubDate>Sun, 28 Mar 2021 01:55:00 -0400</pubDate>
+      
+      <guid>https://xiaotian1339.github.io/posts/thefourth/1/</guid>
+      <description> 某商场的设备能通过红外线自动检测人体温度并输入计算机。先要求编写程序、实现如下功能:如果输入的体温超过37摄氏度，则显示相应警报，提示禁止入内，以降低疫情传播风险。    #include&amp;lt;stdio.h&amp;gt;main() { float temperature; int normal;//定义正常温度 	normal=37;//初始化 	printf(&amp;#34;欢迎使用温度检测系统\n&amp;#34;);//功能 	printf(&amp;#34;请输入您的温度：\n&amp;#34;);//提示输入温度 	scanf(&amp;#34;%f&amp;#34;,&amp;amp;temperature); if (temperature&amp;gt;normal) { printf(&amp;#34;禁止入内，您的温度过高。\n&amp;#34;); } else { printf(&amp;#34;欢迎光临本商城！\n&amp;#34;); } }  运行结果    [ </description>
+    </item>
+    
+    <item>
+      <title>第四次上机报告第三题</title>
       <link>https://xiaotian1339.github.io/posts/fourth-c3/</link>
       <pubDate>Sat, 27 Mar 2021 23:07:27 -0400</pubDate>
       
