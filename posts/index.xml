@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Tcgg&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 28 Mar 2021 02:33:32 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 22:12:07 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算平均分</title>
+      <link>https://xiaotian1339.github.io/posts/fifth-c1/</link>
+      <pubDate>Sun, 28 Mar 2021 22:12:07 -0400</pubDate>
+      
+      <guid>https://xiaotian1339.github.io/posts/fifth-c1/</guid>
+      <description>计算平均分     #include&amp;lt;stdio.h&amp;gt;main() { float score,a,n; a=0,n=0;//变量初始化 	do//直到循环 	{ printf(&amp;#34;请输入您的成绩(以负数结束)：\n&amp;#34;); scanf(&amp;#34;%f&amp;#34;,&amp;amp;score); a+=score; n++; }while(score&amp;gt;0); a=(a-score)/--n;//n先自减在运算 	printf(&amp;#34;平均分为%.3f\n&amp;#34;,a); }  运行结果    [</description>
+    </item>
+    
     <item>
       <title>说明</title>
       <link>https://xiaotian1339.github.io/posts/%E8%AF%B4%E6%98%8E/</link>
