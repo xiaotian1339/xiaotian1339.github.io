@@ -1,60 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Tcgg&#39;s Blog</title>
-    <link>https://xiaotian1339.github.io/posts/</link>
-    <description>Recent content in Posts on Tcgg&#39;s Blog</description>
+    <title>Baogaos on Tcgg&#39;s Blog</title>
+    <link>https://xiaotian1339.github.io/baogao/</link>
+    <description>Recent content in Baogaos on Tcgg&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 28 Mar 2021 23:09:35 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 23:09:35 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/baogao/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>第四次上机报告第二题</title>
-      <link>https://xiaotian1339.github.io/posts/fourth-c2/</link>
+      <link>https://xiaotian1339.github.io/baogao/fourth-c2/</link>
       <pubDate>Sun, 28 Mar 2021 23:09:35 -0400</pubDate>
       
-      <guid>https://xiaotian1339.github.io/posts/fourth-c2/</guid>
+      <guid>https://xiaotian1339.github.io/baogao/fourth-c2/</guid>
       <description>第四次上机报告    第二题    （简单）编程实现某中药房药材按使用频率存放。使用频率越高的药，存放到越近的区域。其中A区存放频率大于或等于50%的药，B区存放使用频率为40%-50%的药，C区存放使用频率为30%-40%的药，D区存放使用频率为20%-30%的药，E区存放使用频率小于20%的药。    #include&amp;lt;stdio.h&amp;gt;main() { float pl; int a,b,c,d; a=50,b=40,c=30,d=20; printf(&amp;#34;请输入该药材使用频率(%%)：\n&amp;#34;); scanf(&amp;#34;%f&amp;#34;,&amp;amp;pl); if (pl&amp;gt;=a)//放入A区 	{ printf(&amp;#34;该药品使用频率很高，请放入A区\n&amp;#34;); } else if (pl&amp;gt;=b)//放入B区 	{ printf(&amp;#34;该药品使用频率较高，请放入B区。\n&amp;#34;); } else if (pl&amp;gt;=c)//放入C区 	{ printf(&amp;#34;该药品使用频率中等，请放入C区\n&amp;#34;); } else if(pl &amp;gt;=d)//放入D区 	{ printf(&amp;#34;该药品使用频率较低，请放入D区\n&amp;#34;); } else//放入E区 	{ printf(&amp;#34;该药品使用频率过低，请放入E区。\n&amp;#34;); }    运行结果    </description>
     </item>
     
     <item>
-      <title>计算平均分</title>
-      <link>https://xiaotian1339.github.io/posts/fifth-c1/</link>
-      <pubDate>Sun, 28 Mar 2021 22:12:07 -0400</pubDate>
-      
-      <guid>https://xiaotian1339.github.io/posts/fifth-c1/</guid>
-      <description>计算平均分     #include&amp;lt;stdio.h&amp;gt;main() { float score,a,n; a=0,n=0;//变量初始化 	do//直到循环 	{ printf(&amp;#34;请输入您的成绩(以负数结束)：\n&amp;#34;); scanf(&amp;#34;%f&amp;#34;,&amp;amp;score); a+=score; n++; }while(score&amp;gt;0); a=(a-score)/--n;//n先自减在运算 	printf(&amp;#34;平均分为%.3f\n&amp;#34;,a); }  运行结果    [</description>
-    </item>
-    
-    <item>
       <title>第四次上机报告第一题</title>
-      <link>https://xiaotian1339.github.io/posts/fourth-c1/</link>
+      <link>https://xiaotian1339.github.io/baogao/fourth-c1/</link>
       <pubDate>Sun, 28 Mar 2021 01:55:00 -0400</pubDate>
       
-      <guid>https://xiaotian1339.github.io/posts/fourth-c1/</guid>
+      <guid>https://xiaotian1339.github.io/baogao/fourth-c1/</guid>
       <description> 某商场的设备能通过红外线自动检测人体温度并输入计算机。先要求编写程序、实现如下功能:如果输入的体温超过37摄氏度，则显示相应警报，提示禁止入内，以降低疫情传播风险。    #include&amp;lt;stdio.h&amp;gt;main() { float temperature; int normal;//定义正常温度 	normal=37;//初始化 	printf(&amp;#34;欢迎使用温度检测系统\n&amp;#34;);//功能 	printf(&amp;#34;请输入您的温度：\n&amp;#34;);//提示输入温度 	scanf(&amp;#34;%f&amp;#34;,&amp;amp;temperature); if (temperature&amp;gt;normal) { printf(&amp;#34;禁止入内，您的温度过高。\n&amp;#34;); } else { printf(&amp;#34;欢迎光临本商城！\n&amp;#34;); } }  运行结果    [ </description>
     </item>
     
     <item>
       <title>第四次上机报告第三题</title>
-      <link>https://xiaotian1339.github.io/posts/fourth-c3/</link>
+      <link>https://xiaotian1339.github.io/baogao/fourth-c3/</link>
       <pubDate>Sat, 27 Mar 2021 23:07:27 -0400</pubDate>
       
-      <guid>https://xiaotian1339.github.io/posts/fourth-c3/</guid>
+      <guid>https://xiaotian1339.github.io/baogao/fourth-c3/</guid>
       <description>第四次上机报告    Tc.Shi     自动售货机为客户提供各种饮料，饮料的价格有3种: 2元、3元、5元，投入2元可选择&amp;quot;农夫山泉&amp;quot;、&amp;ldquo;怡宝矿泉水&amp;quot;和&amp;quot;康师傅矿泉水&amp;quot;之一，投入3元可以选择&amp;quot;可口可乐”、&amp;ldquo;雪碧&amp;quot;和&amp;quot;果粒橙&amp;quot;之一，投入5元可以选择&amp;quot;奶荼&amp;rdquo;、&amp;ldquo;咖啡&amp;quot;和&amp;quot;酸奶&amp;quot;之一。编写程序，模拟用户向自动售货机投入钱币，并选择一种饮料，使用scanf.模拟用户投入钱币，使用getchar,函数模拟用户选择的饮料。(输入A，B.C代表所选择的饮料)     //自动售货机 #include&amp;lt;stdio.h&amp;gt;main() { int money;//定义整型变量 	char select; printf(&amp;#34;您投入的金额为(￥):\n&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;money); switch (money)//识别钱数 	{ case 2://两元 	printf(&amp;#34;您投入了2元，您可以选择：\n&amp;#34;); printf(&amp;#34;A.农夫山泉\nB.怡宝矿泉水\nC.康师傅矿泉水\n&amp;#34;); printf(&amp;#34;请键入您的选择:\n&amp;#34;);//提示输入 	fflush(stdin); select = getchar(); printf(&amp;#34;您的选择为：%c\n&amp;#34;,select); switch (select) { case&amp;#39;a&amp;#39;: case&amp;#39;A&amp;#39;: printf(&amp;#34;你得到了NongFu Spring！\n&amp;#34;); break; case&amp;#39;b&amp;#39;: case&amp;#39;B&amp;#39;: printf(&amp;#34;你得到了怡宝矿泉水!\n&amp;#34;); break; case&amp;#39;c&amp;#39;: case&amp;#39;C&amp;#39;: printf(&amp;#34;你得到了康师傅矿泉水！\n&amp;#34;); break; default: printf(&amp;#34;你的选择错误，作为惩罚，机器吞币，请重新投币！\n&amp;#34;); break; } break; case 3: printf(&amp;#34;您投入了3元，您可以选择：\n&amp;#34;); printf(&amp;#34;A.Coca Cola\nB.雪碧\nC.果粒橙\n&amp;#34;); printf(&amp;#34;请键入您的选择:\n&amp;#34;); fflush(stdin); select = getchar(); printf(&amp;#34;您的选择为：%c\n&amp;#34;,select); switch (select) { case&amp;#39;a&amp;#39;: case&amp;#39;A&amp;#39;: printf(&amp;#34;你得到了Coca Cola！\n&amp;#34;); break; case&amp;#39;b&amp;#39;: case&amp;#39;B&amp;#39;: printf(&amp;#34;你得到了雪碧!</description>
-    </item>
-    
-    <item>
-      <title>乱写的</title>
-      <link>https://xiaotian1339.github.io/posts/%E4%B9%B1%E5%86%99%E7%9A%84/</link>
-      <pubDate>Sat, 27 Mar 2021 05:07:17 -0400</pubDate>
-      
-      <guid>https://xiaotian1339.github.io/posts/%E4%B9%B1%E5%86%99%E7%9A%84/</guid>
-      <description>这是一级标题    这是二级标题    这是三级标题    这是四级标题    这是五级标题    这是六级标题     这是加粗的文字 这是倾斜的文字` 这是斜体加粗的文字 这是加删除线的文字     这是引用的内容
- 这是引用的内容
-        这是引用的内容
-           ![图片alt](图片地址 &amp;lsquo;&amp;lsquo;图片title&amp;rsquo;&#39;)
-图片alt就是显示在图片下面的文字，相当于对图片内容的解释。 图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加    超链接名 title可加可不加
-Simple 简书 百度     列表内容   列表内容   列表内容  注意：- + * 跟内容之间都要有一个空格 -*&amp;mdash;&amp;mdash;</description>
     </item>
     
   </channel>
