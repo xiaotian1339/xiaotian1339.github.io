@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="color-scheme" content="light dark">
+
+    
+
+    <meta name="author" content="Tc_Shi">
+    <meta name="description" content="实现函数输出n行数字金字塔    函数接口定义：    void pyramid( int n ); 其中n是用户传入的参数，为[1, 9]的正整数。要求函数按照如样例所示的格式打印出n行数字金字塔。注意每个数字后面跟一个空格。
+初始代码：    #include &lt;stdio.h&gt; void pyramid( int n ); int main() { int n; scanf(&#34;%d&#34;, &amp;n); pyramid(n); return 0; } /* 你的代码将被嵌在这里 */ 输入样例：    5 输出样例：    1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 解题思路：    首先观察
+n 决定一共有几行 例如输入 5 就是有五层">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="实现函数输出n行数字金字塔"/>
+<meta name="twitter:description" content="实现函数输出n行数字金字塔    函数接口定义：    void pyramid( int n ); 其中n是用户传入的参数，为[1, 9]的正整数。要求函数按照如样例所示的格式打印出n行数字金字塔。注意每个数字后面跟一个空格。
+初始代码：    #include &lt;stdio.h&gt; void pyramid( int n ); int main() { int n; scanf(&#34;%d&#34;, &amp;n); pyramid(n); return 0; } /* 你的代码将被嵌在这里 */ 输入样例：    5 输出样例：    1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 解题思路：    首先观察
+n 决定一共有几行 例如输入 5 就是有五层"/>
+
+    <meta property="og:title" content="实现函数输出n行数字金字塔" />
+<meta property="og:description" content="实现函数输出n行数字金字塔    函数接口定义：    void pyramid( int n ); 其中n是用户传入的参数，为[1, 9]的正整数。要求函数按照如样例所示的格式打印出n行数字金字塔。注意每个数字后面跟一个空格。
+初始代码：    #include &lt;stdio.h&gt; void pyramid( int n ); int main() { int n; scanf(&#34;%d&#34;, &amp;n); pyramid(n); return 0; } /* 你的代码将被嵌在这里 */ 输入样例：    5 输出样例：    1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 解题思路：    首先观察
+n 决定一共有几行 例如输入 5 就是有五层" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiaotian1339.github.io/posts/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BAn%E8%A1%8C%E6%95%B0%E5%AD%97%E9%87%91%E5%AD%97%E5%A1%94/" />
+<meta property="article:published_time" content="2021-03-31T04:47:24-04:00" />
+<meta property="article:modified_time" content="2021-03-31T04:47:24-04:00" />
+
+
+    <title>
+  实现函数输出n行数字金字塔 · Tcgg&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="https://xiaotian1339.github.io/posts/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BAn%E8%A1%8C%E6%95%B0%E5%AD%97%E9%87%91%E5%AD%97%E5%A1%94/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.1.7" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.dde8a61eb31a32353b4baf3d9113f03c4ea2a8ca9bb736f59ca2d2b2cb664f0b.css" integrity="sha256-3eimHrMaMjU7S689kRPwPE6iqMqbtzb1nKLSsstmTws=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/ico-13.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script defer src="https://twemoji.maxcdn.com/v/13.0.2/twemoji.min.js"
+        integrity="sha384-wyB/MspSJ/r2bT2kCj44qtsYRYlpzO2oAPhRj5myrWD63dt6qWv4x8AZe7Fl3K3b" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.80.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Tcgg&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">主页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">博客总览</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/baogao/">上机报告</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/dh/">导航</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/game/">Fun</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/cdt/">C实例</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于我</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://xiaotian1339.github.io/posts/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BAn%E8%A1%8C%E6%95%B0%E5%AD%97%E9%87%91%E5%AD%97%E5%A1%94/">
+              实现函数输出n行数字金字塔
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime='2021-03-31T04:47:24-04:00'>
+                March 31, 2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div>
+        
+        <h1 id="实现函数输出n行数字金字塔">
+  实现函数输出n行数字金字塔
+  <a class="heading-link" href="#%e5%ae%9e%e7%8e%b0%e5%87%bd%e6%95%b0%e8%be%93%e5%87%ban%e8%a1%8c%e6%95%b0%e5%ad%97%e9%87%91%e5%ad%97%e5%a1%94">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<h3 id="函数接口定义">
+  函数接口定义：
+  <a class="heading-link" href="#%e5%87%bd%e6%95%b0%e6%8e%a5%e5%8f%a3%e5%ae%9a%e4%b9%89">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pyramid</span>( <span style="color:#66d9ef">int</span> n );
+</code></pre></div><p>其中<code>n</code>是用户传入的参数，为[1, 9]的正整数。要求函数按照如样例所示的格式打印出<code>n</code>行数字金字塔。注意每个数字后面跟一个空格。</p>
+<h5 id="初始代码">
+  初始代码：
+  <a class="heading-link" href="#%e5%88%9d%e5%a7%8b%e4%bb%a3%e7%a0%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pyramid</span>( <span style="color:#66d9ef">int</span> n );
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{    
+    <span style="color:#66d9ef">int</span> n;
+
+    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>n);
+    pyramid(n);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#75715e">/* 你的代码将被嵌在这里 */</span>
+</code></pre></div><h3 id="输入样例">
+  输入样例：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<pre><code class="language-in" data-lang="in">5
+</code></pre><h3 id="输出样例">
+  输出样例：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<pre><code class="language-out" data-lang="out">    1 
+   2 2 
+  3 3 3 
+ 4 4 4 4 
+5 5 5 5 5 
+</code></pre><h2 id="解题思路">
+  解题思路：
+  <a class="heading-link" href="#%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>首先观察</p>
+<p>n  决定一共有几行  例如输入 5  就是有五层</p>
+<p>1.最先想到的是 循环这5层   从第一层到第五层  1  2  3  4  5</p>
+<p>2.考虑每一层的两个点： ①每一层一开始空得格是几个    例如 第一层前面空了4个空格  第二层空了三个空格  （n-第几层）；</p>
+<p>​                                            ②每一层输出几  ：第一层输出 1  第二层输出 2  第三层都是输出3   所以也就是 输出第1步中的第几层</p>
+<p>3.最后一步：考虑形状  ：每层输出完 就换行 也就是在循环的最后进行 <code>printf(&quot;\n&quot;);</code></p>
+<p>4.注意点： 在c 语言中循环体中 for（）{}的循环条件中 的变量 需要现在外面声明之后 才可以在 for（）中使用</p>
+<h2 id="解题">
+  解题：
+  <a class="heading-link" href="#%e8%a7%a3%e9%a2%98">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pyramid</span>( <span style="color:#66d9ef">int</span> n );
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> n;
+ 
+    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>n);
+    pyramid(n);
+ 
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+ 
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pyramid</span>( <span style="color:#66d9ef">int</span> n ){
+    <span style="color:#66d9ef">int</span> i,j,k;
+   <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>){
+        <span style="color:#66d9ef">for</span>( j<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;j<span style="color:#f92672">&lt;=</span>n<span style="color:#f92672">-</span>i;j<span style="color:#f92672">++</span>){
+         printf(<span style="color:#e6db74">&#34; &#34;</span>);
+        }
+        <span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;k<span style="color:#f92672">&lt;=</span>i;k<span style="color:#f92672">++</span>){
+            printf(<span style="color:#e6db74">&#34;%d&#34;</span>,i);
+            printf(<span style="color:#e6db74">&#34; &#34;</span>);
+        }
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+   }
+}
+ 
+</code></pre></div><hr>
+<p>解题结束！</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Tc_Shi's Personal Blog.</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Tc_Shi 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.f92783b4545b68f3523e5d6ad91d93f76818f9d0db2ffa13bda31b6119cde62b.js" integrity="sha256-&#43;SeDtFRbaPNSPl1q2R2T92gY&#43;dDbL/oTvaMbYRnN5is="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
