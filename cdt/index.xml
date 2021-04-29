@@ -6,7 +6,22 @@
     <description>Recent content in Cdts on Tcgg&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 02 Apr 2021 04:32:24 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/cdt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Apr 2021 03:33:18 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/cdt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C练习1</title>
+      <link>https://xiaotian1339.github.io/cdt/ctest1/</link>
+      <pubDate>Thu, 29 Apr 2021 03:33:18 -0400</pubDate>
+      
+      <guid>https://xiaotian1339.github.io/cdt/ctest1/</guid>
+      <description>练习3-4 统计字符 (15 分)    本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。
+输入格式:    输入为10个字符。最后一个回车表示输入结束，不算在内。
+输出格式:    在一行内按照
+letter = 英文字母个数, blank = 空格或回车个数, digit = 数字字符个数, other = 其他字符个数 的格式输出。
+输入样例:    aZ &amp;amp; 09 Az 输出样例:    letter = 4, blank = 3, digit = 2, other = 1 练习3-5 输出闰年 (15 分)    输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。
+输入格式:    输入在一行中给出21世纪的某个截止年份。
+输出格式:    逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出&amp;quot;Invalid year!</description>
+    </item>
+    
     <item>
       <title>**统计学生平均成绩与及格人数**</title>
       <link>https://xiaotian1339.github.io/cdt/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E4%B8%8E%E5%8F%8A%E6%A0%BC%E4%BA%BA%E6%95%B0/</link>

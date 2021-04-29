@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="color-scheme" content="light dark">
+
+    
+
+    <meta name="author" content="Tc_Shi">
+    <meta name="description" content="练习3-4 统计字符 (15 分)    本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。
+输入格式:    输入为10个字符。最后一个回车表示输入结束，不算在内。
+输出格式:    在一行内按照
+letter = 英文字母个数, blank = 空格或回车个数, digit = 数字字符个数, other = 其他字符个数 的格式输出。
+输入样例:    aZ &amp; 09 Az 输出样例:    letter = 4, blank = 3, digit = 2, other = 1 练习3-5 输出闰年 (15 分)    输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。
+输入格式:    输入在一行中给出21世纪的某个截止年份。
+输出格式:    逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出&quot;Invalid year!">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C练习1"/>
+<meta name="twitter:description" content="练习3-4 统计字符 (15 分)    本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。
+输入格式:    输入为10个字符。最后一个回车表示输入结束，不算在内。
+输出格式:    在一行内按照
+letter = 英文字母个数, blank = 空格或回车个数, digit = 数字字符个数, other = 其他字符个数 的格式输出。
+输入样例:    aZ &amp; 09 Az 输出样例:    letter = 4, blank = 3, digit = 2, other = 1 练习3-5 输出闰年 (15 分)    输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。
+输入格式:    输入在一行中给出21世纪的某个截止年份。
+输出格式:    逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出&quot;Invalid year!"/>
+
+    <meta property="og:title" content="C练习1" />
+<meta property="og:description" content="练习3-4 统计字符 (15 分)    本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。
+输入格式:    输入为10个字符。最后一个回车表示输入结束，不算在内。
+输出格式:    在一行内按照
+letter = 英文字母个数, blank = 空格或回车个数, digit = 数字字符个数, other = 其他字符个数 的格式输出。
+输入样例:    aZ &amp; 09 Az 输出样例:    letter = 4, blank = 3, digit = 2, other = 1 练习3-5 输出闰年 (15 分)    输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。
+输入格式:    输入在一行中给出21世纪的某个截止年份。
+输出格式:    逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出&quot;Invalid year!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiaotian1339.github.io/cdt/ctest1/" />
+<meta property="article:published_time" content="2021-04-29T03:33:18-04:00" />
+<meta property="article:modified_time" content="2021-04-29T03:33:18-04:00" />
+
+
+    <title>
+  C练习1 · Tcgg&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="https://xiaotian1339.github.io/cdt/ctest1/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.1.7" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.dde8a61eb31a32353b4baf3d9113f03c4ea2a8ca9bb736f59ca2d2b2cb664f0b.css" integrity="sha256-3eimHrMaMjU7S689kRPwPE6iqMqbtzb1nKLSsstmTws=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/ico-13.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script defer src="https://twemoji.maxcdn.com/v/13.0.2/twemoji.min.js"
+        integrity="sha384-wyB/MspSJ/r2bT2kCj44qtsYRYlpzO2oAPhRj5myrWD63dt6qWv4x8AZe7Fl3K3b" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.80.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Tcgg&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">主页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">博客总览</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/baogao/">上机报告</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/dh/">导航</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/game/">Fun</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/cdt/">C实例</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于我</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://xiaotian1339.github.io/cdt/ctest1/">
+          C练习1
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="练习3-4-统计字符-15-分">
+  <strong>练习3-4 统计字符 (15 分)</strong>
+  <a class="heading-link" href="#%e7%bb%83%e4%b9%a03-4-%e7%bb%9f%e8%ae%a1%e5%ad%97%e7%ac%a6-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。</p>
+<h3 id="输入格式">
+  输入格式:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入为10个字符。最后一个回车表示输入结束，不算在内。</p>
+<h3 id="输出格式">
+  输出格式:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在一行内按照</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">letter <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">英文字母个数</span>, blank <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">空格或回车个数</span>, digit <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">数字字符个数</span>, other <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">其他字符个数</span>
+</code></pre></div><p>的格式输出。</p>
+<h3 id="输入样例">
+  输入样例:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">aZ <span style="color:#f92672">&amp;</span>
+<span style="color:#ae81ff">09</span> Az
+</code></pre></div><h3 id="输出样例">
+  输出样例:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">letter <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, blank <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, digit <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, other <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><h1 id="练习3-5-输出闰年-15-分">
+  <strong>练习3-5 输出闰年 (15 分)</strong>
+  <a class="heading-link" href="#%e7%bb%83%e4%b9%a03-5-%e8%be%93%e5%87%ba%e9%97%b0%e5%b9%b4-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>输出21世纪中截止某个年份以来的所有闰年年份。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。</p>
+<h3 id="输入格式-1">
+  输入格式:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入在一行中给出21世纪的某个截止年份。</p>
+<h3 id="输出格式-1">
+  输出格式:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>逐行输出满足条件的所有闰年年份，即每个年份占一行。输入若非21世纪的年份则输出&quot;Invalid year!&quot;。若不存在任何闰年，则输出“None”。</p>
+<h3 id="输入样例1">
+  输入样例1:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">2048</span>
+</code></pre></div><h3 id="输出样例1">
+  输出样例1:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">2004</span>
+<span style="color:#ae81ff">2008</span>
+<span style="color:#ae81ff">2012</span>
+<span style="color:#ae81ff">2016</span>
+<span style="color:#ae81ff">2020</span>
+<span style="color:#ae81ff">2024</span>
+<span style="color:#ae81ff">2028</span>
+<span style="color:#ae81ff">2032</span>
+<span style="color:#ae81ff">2036</span>
+<span style="color:#ae81ff">2040</span>
+<span style="color:#ae81ff">2044</span>
+<span style="color:#ae81ff">2048</span>
+</code></pre></div><h3 id="输入样例2">
+  输入样例2:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">2000</span>
+</code></pre></div><h3 id="输出样例2">
+  输出样例2:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">Invalid year<span style="color:#f92672">!</span>
+</code></pre></div><h1 id="练习3-7-成绩转换-15-分">
+  <strong>练习3-7 成绩转换 (15 分)</strong>
+  <a class="heading-link" href="#%e7%bb%83%e4%b9%a03-7-%e6%88%90%e7%bb%a9%e8%bd%ac%e6%8d%a2-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求编写程序将一个百分制成绩转换为五分制成绩。转换规则：</p>
+<ul>
+<li>大于等于90分为A；</li>
+<li>小于90且大于等于80为B；</li>
+<li>小于80且大于等于70为C；</li>
+<li>小于70且大于等于60为D；</li>
+<li>小于60为E。</li>
+</ul>
+<h3 id="输入格式-2">
+  输入格式:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入在一行中给出一个整数的百分制成绩。</p>
+<h3 id="输出格式-2">
+  输出格式:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>在一行中输出对应的五分制成绩。</p>
+<h3 id="输入样例-1">
+  输入样例:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">90</span>
+</code></pre></div><h3 id="输出样例-1">
+  输出样例:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">A
+</code></pre></div><h1 id="练习3-8-查询水果价格-15-分">
+  <strong>练习3-8 查询水果价格 (15 分)</strong>
+  <a class="heading-link" href="#%e7%bb%83%e4%b9%a03-8-%e6%9f%a5%e8%af%a2%e6%b0%b4%e6%9e%9c%e4%bb%b7%e6%a0%bc-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>给定四种水果，分别是苹果（apple）、梨（pear）、桔子（orange）、葡萄（grape），单价分别对应为3.00元/公斤、2.50元/公斤、4.10元/公斤、10.20元/公斤。</p>
+<p>首先在屏幕上显示以下菜单：</p>
+<pre><code>[1] apple
+[2] pear
+[3] orange
+[4] grape
+[0] exit
+</code></pre><p>用户可以输入编号1~4查询对应水果的单价。当连续查询次数超过5次时，程序应自动退出查询；不到5次而用户输入0即退出；输入其他编号，显示价格为0。</p>
+<h3 id="输入格式-3">
+  输入格式:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入在一行中给出用户连续输入的若干个编号。</p>
+<h3 id="输出格式-3">
+  输出格式:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>首先在屏幕上显示菜单。然后对应用户的每个输入，在一行中按格式“price = 价格”输出查询结果，其中价格保留两位小数。当用户连续查询次数超过5次、或主动输入0时，程序结束。</p>
+<h3 id="输入样例1-1">
+  输入样例1:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b1-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2</span>
+</code></pre></div><h3 id="输出样例1-1">
+  输出样例1:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b1-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[<span style="color:#ae81ff">1</span>] apple
+[<span style="color:#ae81ff">2</span>] pear
+[<span style="color:#ae81ff">3</span>] orange
+[<span style="color:#ae81ff">4</span>] grape
+[<span style="color:#ae81ff">0</span>] exit
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">4.10</span>
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.00</span>
+</code></pre></div><h3 id="输入样例2-1">
+  输入样例2:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b2-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</code></pre></div><h3 id="输出样例2-1">
+  输出样例2:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b2-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[<span style="color:#ae81ff">1</span>] apple
+[<span style="color:#ae81ff">2</span>] pear
+[<span style="color:#ae81ff">3</span>] orange
+[<span style="color:#ae81ff">4</span>] grape
+[<span style="color:#ae81ff">0</span>] exit
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.00</span>
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.50</span>
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">4.10</span>
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">4.10</span>
+price <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.20</span>
+</code></pre></div><h1 id="练习7-10-查找指定字符-15-分">
+  <strong>练习7-10 查找指定字符 (15 分)</strong>
+  <a class="heading-link" href="#%e7%bb%83%e4%b9%a07-10-%e6%9f%a5%e6%89%be%e6%8c%87%e5%ae%9a%e5%ad%97%e7%ac%a6-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求编写程序，从给定字符串中查找某指定的字符。</p>
+<h3 id="输入格式-4">
+  输入格式：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入的第一行是一个待查找的字符。第二行是一个以回车结束的非空字符串（不超过80个字符）。</p>
+<h3 id="输出格式-4">
+  输出格式：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>如果找到，在一行内按照格式“index = 下标”输出该字符在字符串中所对应的最大下标（下标从0开始）；否则输出&quot;Not Found&quot;。</p>
+<h3 id="输入样例1-2">
+  输入样例1：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b1-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">m
+programming
+</code></pre></div><h3 id="输出样例1-2">
+  输出样例1：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b1-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">index <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>
+</code></pre></div><h3 id="输入样例2-2">
+  输入样例2：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b2-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">a
+<span style="color:#ae81ff">1234</span>
+</code></pre></div><h3 id="输出样例2-2">
+  输出样例2：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b2-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">Not Found
+</code></pre></div><hr>
+<hr>
+<hr>
+<h1 id="自定函数题目">
+  自定函数题目
+  <a class="heading-link" href="#%e8%87%aa%e5%ae%9a%e5%87%bd%e6%95%b0%e9%a2%98%e7%9b%ae">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<h1 id="习题5-2-使用函数求奇数和-15-分">
+  <strong>习题5-2 使用函数求奇数和 (15 分)</strong>
+  <a class="heading-link" href="#%e4%b9%a0%e9%a2%985-2-%e4%bd%bf%e7%94%a8%e5%87%bd%e6%95%b0%e6%b1%82%e5%a5%87%e6%95%b0%e5%92%8c-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求实现一个函数，计算N个整数中所有奇数的和，同时实现一个判断奇偶性的函数。</p>
+<h3 id="函数接口定义">
+  函数接口定义：
+  <a class="heading-link" href="#%e5%87%bd%e6%95%b0%e6%8e%a5%e5%8f%a3%e5%ae%9a%e4%b9%89">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">even</span>( <span style="color:#66d9ef">int</span> n );
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">OddSum</span>( <span style="color:#66d9ef">int</span> List[], <span style="color:#66d9ef">int</span> N );
+</code></pre></div><p>其中函数<code>even</code>将根据用户传入的参数<code>n</code>的奇偶性返回相应值：当<code>n</code>为偶数时返回1，否则返回0。函数<code>OddSum</code>负责计算并返回传入的<code>N</code>个整数<code>List[]</code>中所有奇数的和。</p>
+<h3 id="裁判测试程序样例">
+  裁判测试程序样例：
+  <a class="heading-link" href="#%e8%a3%81%e5%88%a4%e6%b5%8b%e8%af%95%e7%a8%8b%e5%ba%8f%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#define MAXN 10
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">even</span>( <span style="color:#66d9ef">int</span> n );
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">OddSum</span>( <span style="color:#66d9ef">int</span> List[], <span style="color:#66d9ef">int</span> N );
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{    
+    <span style="color:#66d9ef">int</span> List[MAXN], N, i;
+
+    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>N);
+    printf(<span style="color:#e6db74">&#34;Sum of ( &#34;</span>);
+    <span style="color:#66d9ef">for</span> ( i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>N; i<span style="color:#f92672">++</span> ) {
+        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>List[i]);
+        <span style="color:#66d9ef">if</span> ( even(List[i])<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> )
+            printf(<span style="color:#e6db74">&#34;%d &#34;</span>, List[i]);
+    }
+    printf(<span style="color:#e6db74">&#34;) = %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, OddSum(List, N));
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#75715e">/* 你的代码将被嵌在这里 */</span>
+</code></pre></div><h3 id="输入样例-2">
+  输入样例：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">6</span>
+<span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">88</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">15</span>
+</code></pre></div><h3 id="输出样例-2">
+  输出样例：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">Sum of ( <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">15</span> ) <span style="color:#f92672">=</span> <span style="color:#ae81ff">19</span>
+</code></pre></div><h1 id="习题5-3-使用函数计算两点间的距离-10-分">
+  <strong>习题5-3 使用函数计算两点间的距离 (10 分)</strong>
+  <a class="heading-link" href="#%e4%b9%a0%e9%a2%985-3-%e4%bd%bf%e7%94%a8%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e4%b8%a4%e7%82%b9%e9%97%b4%e7%9a%84%e8%b7%9d%e7%a6%bb-10-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求实现一个函数，对给定平面任意两点坐标(<em>x</em>1,<em>y</em>1)和(<em>x</em>2,<em>y</em>2)，求这两点之间的距离。</p>
+<h3 id="函数接口定义-1">
+  函数接口定义：
+  <a class="heading-link" href="#%e5%87%bd%e6%95%b0%e6%8e%a5%e5%8f%a3%e5%ae%9a%e4%b9%89-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">dist</span>( <span style="color:#66d9ef">double</span> x1, <span style="color:#66d9ef">double</span> y1, <span style="color:#66d9ef">double</span> x2, <span style="color:#66d9ef">double</span> y2 );
+</code></pre></div><p>其中用户传入的参数为平面上两个点的坐标(<code>x1</code>, <code>y1</code>)和(<code>x2</code>, <code>y2</code>)，函数<code>dist</code>应返回两点间的距离。</p>
+<h3 id="裁判测试程序样例-1">
+  裁判测试程序样例：
+  <a class="heading-link" href="#%e8%a3%81%e5%88%a4%e6%b5%8b%e8%af%95%e7%a8%8b%e5%ba%8f%e6%a0%b7%e4%be%8b-1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;math.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">dist</span>( <span style="color:#66d9ef">double</span> x1, <span style="color:#66d9ef">double</span> y1, <span style="color:#66d9ef">double</span> x2, <span style="color:#66d9ef">double</span> y2 );
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{    
+    <span style="color:#66d9ef">double</span> x1, y1, x2, y2;
+
+    scanf(<span style="color:#e6db74">&#34;%lf %lf %lf %lf&#34;</span>, <span style="color:#f92672">&amp;</span>x1, <span style="color:#f92672">&amp;</span>y1, <span style="color:#f92672">&amp;</span>x2, <span style="color:#f92672">&amp;</span>y2);
+    printf(<span style="color:#e6db74">&#34;dist = %.2f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, dist(x1, y1, x2, y2));
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#75715e">/* 你的代码将被嵌在这里 */</span>
+</code></pre></div><h3 id="输入样例-3">
+  输入样例：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b-3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">100</span>
+</code></pre></div><h3 id="输出样例-3">
+  输出样例：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b-3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">210.24</span>
+</code></pre></div><h1 id="习题6-1-分类统计字符个数-15-分">
+  <strong>习题6-1 分类统计字符个数 (15 分)</strong>
+  <a class="heading-link" href="#%e4%b9%a0%e9%a2%986-1-%e5%88%86%e7%b1%bb%e7%bb%9f%e8%ae%a1%e5%ad%97%e7%ac%a6%e4%b8%aa%e6%95%b0-15-%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求实现一个函数，统计给定字符串中英文字母、空格或回车、数字字符和其他字符的个数。</p>
+<h3 id="函数接口定义-2">
+  函数接口定义：
+  <a class="heading-link" href="#%e5%87%bd%e6%95%b0%e6%8e%a5%e5%8f%a3%e5%ae%9a%e4%b9%89-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">StringCount</span>( <span style="color:#66d9ef">char</span> s[] );
+</code></pre></div><p>其中 <code>char s[]</code> 是用户传入的字符串。函数<code>StringCount</code>须在一行内按照</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">letter <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">英文字母个数</span>, blank <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">空格或回车个数</span>, digit <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">数字字符个数</span>, other <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">其他字符个数</span>
+</code></pre></div><p>的格式输出。</p>
+<h3 id="裁判测试程序样例-2">
+  裁判测试程序样例：
+  <a class="heading-link" href="#%e8%a3%81%e5%88%a4%e6%b5%8b%e8%af%95%e7%a8%8b%e5%ba%8f%e6%a0%b7%e4%be%8b-2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define MAXS 15
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">StringCount</span>( <span style="color:#66d9ef">char</span> s[] );
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ReadString</span>( <span style="color:#66d9ef">char</span> s[] ); <span style="color:#75715e">/* 由裁判实现，略去不表 */</span>
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">char</span> s[MAXS];
+
+    ReadString(s);
+    StringCount(s);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#75715e">/* Your function will be put here */</span>
+</code></pre></div><h3 id="输入样例-4">
+  输入样例：
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b-4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">aZ <span style="color:#f92672">&amp;</span>
+<span style="color:#ae81ff">09</span> Az
+</code></pre></div><h3 id="输出样例-4">
+  输出样例：
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b-4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">letter <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, blank <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, digit <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, other <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div>
+  </article>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Tc_Shi's Personal Blog.</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Tc_Shi 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.f92783b4545b68f3523e5d6ad91d93f76818f9d0db2ffa13bda31b6119cde62b.js" integrity="sha256-&#43;SeDtFRbaPNSPl1q2R2T92gY&#43;dDbL/oTvaMbYRnN5is="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
