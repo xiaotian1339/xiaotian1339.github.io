@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="color-scheme" content="light dark">
+
+    
+
+    <meta name="author" content="Tc_Shi">
+    <meta name="description" content="*统计学生平均成绩与及格人数    本题要求编写程序，计算学生们的平均成绩，并统计及格（成绩不低于60分）的人数。题目保证输入与输出均在整型范围内。
+输入格式:    输入在第一行中给出非负整数N，即学生人数。第二行给出N个非负整数，即这N位学生的成绩，其间以空格分隔。
+输出格式:    按照以下格式输出：
+caverage = 成绩均值 count = 及格人数 其中平均值精确到小数点后一位。
+输入样例:    5 77 54 92 73 60 输出样例:    average = 71.2 count = 4  解题代码：    #include&lt;stdio.h&gt;int main() { int n; scanf(&#34;%d&#34;,&amp;n); if(n&gt;=0){ //判断输入是否为0人  if(n==0){ printf(&#34;average = 0.0\n&#34;); printf(&#34;count = 0&#34;); } else{ int i; int sum=0; int temp=0; for(i=1;i&lt;=n;i&#43;&#43;) { int t; scanf(&#34;%d&#34;,&amp;t); sum&#43;=t; if(t&gt;=60) temp&#43;&#43;; } printf(&#34;average = %.">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="**统计学生平均成绩与及格人数**"/>
+<meta name="twitter:description" content="*统计学生平均成绩与及格人数    本题要求编写程序，计算学生们的平均成绩，并统计及格（成绩不低于60分）的人数。题目保证输入与输出均在整型范围内。
+输入格式:    输入在第一行中给出非负整数N，即学生人数。第二行给出N个非负整数，即这N位学生的成绩，其间以空格分隔。
+输出格式:    按照以下格式输出：
+caverage = 成绩均值 count = 及格人数 其中平均值精确到小数点后一位。
+输入样例:    5 77 54 92 73 60 输出样例:    average = 71.2 count = 4  解题代码：    #include&lt;stdio.h&gt;int main() { int n; scanf(&#34;%d&#34;,&amp;n); if(n&gt;=0){ //判断输入是否为0人  if(n==0){ printf(&#34;average = 0.0\n&#34;); printf(&#34;count = 0&#34;); } else{ int i; int sum=0; int temp=0; for(i=1;i&lt;=n;i&#43;&#43;) { int t; scanf(&#34;%d&#34;,&amp;t); sum&#43;=t; if(t&gt;=60) temp&#43;&#43;; } printf(&#34;average = %."/>
+
+    <meta property="og:title" content="**统计学生平均成绩与及格人数**" />
+<meta property="og:description" content="*统计学生平均成绩与及格人数    本题要求编写程序，计算学生们的平均成绩，并统计及格（成绩不低于60分）的人数。题目保证输入与输出均在整型范围内。
+输入格式:    输入在第一行中给出非负整数N，即学生人数。第二行给出N个非负整数，即这N位学生的成绩，其间以空格分隔。
+输出格式:    按照以下格式输出：
+caverage = 成绩均值 count = 及格人数 其中平均值精确到小数点后一位。
+输入样例:    5 77 54 92 73 60 输出样例:    average = 71.2 count = 4  解题代码：    #include&lt;stdio.h&gt;int main() { int n; scanf(&#34;%d&#34;,&amp;n); if(n&gt;=0){ //判断输入是否为0人  if(n==0){ printf(&#34;average = 0.0\n&#34;); printf(&#34;count = 0&#34;); } else{ int i; int sum=0; int temp=0; for(i=1;i&lt;=n;i&#43;&#43;) { int t; scanf(&#34;%d&#34;,&amp;t); sum&#43;=t; if(t&gt;=60) temp&#43;&#43;; } printf(&#34;average = %." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiaotian1339.github.io/cdt/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E4%B8%8E%E5%8F%8A%E6%A0%BC%E4%BA%BA%E6%95%B0/" />
+<meta property="article:published_time" content="2021-04-02T04:32:24-04:00" />
+<meta property="article:modified_time" content="2021-04-02T04:32:24-04:00" />
+
+
+    <title>
+  **统计学生平均成绩与及格人数** · Tcgg&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="https://xiaotian1339.github.io/cdt/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E4%B8%8E%E5%8F%8A%E6%A0%BC%E4%BA%BA%E6%95%B0/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.1.7" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.dde8a61eb31a32353b4baf3d9113f03c4ea2a8ca9bb736f59ca2d2b2cb664f0b.css" integrity="sha256-3eimHrMaMjU7S689kRPwPE6iqMqbtzb1nKLSsstmTws=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/ico-13.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script defer src="https://twemoji.maxcdn.com/v/13.0.2/twemoji.min.js"
+        integrity="sha384-wyB/MspSJ/r2bT2kCj44qtsYRYlpzO2oAPhRj5myrWD63dt6qWv4x8AZe7Fl3K3b" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.80.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Tcgg&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">主页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">博客总览</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/baogao/">上机报告</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/dh/">导航</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/game/">Fun</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/cdt/">C实例</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于我</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://xiaotian1339.github.io/cdt/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E4%B8%8E%E5%8F%8A%E6%A0%BC%E4%BA%BA%E6%95%B0/">
+          **统计学生平均成绩与及格人数**
+        </a>
+      </h1>
+    </header>
+
+    <hr>
+<h1 id="统计学生平均成绩与及格人数">
+  *<em>统计学生平均成绩与及格人数</em>
+  <a class="heading-link" href="#%e7%bb%9f%e8%ae%a1%e5%ad%a6%e7%94%9f%e5%b9%b3%e5%9d%87%e6%88%90%e7%bb%a9%e4%b8%8e%e5%8f%8a%e6%a0%bc%e4%ba%ba%e6%95%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h1>
+<p>本题要求编写程序，计算学生们的平均成绩，并统计及格（成绩不低于60分）的人数。题目保证输入与输出均在整型范围内。</p>
+<h3 id="输入格式">
+  输入格式:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>输入在第一行中给出非负整数N，即学生人数。第二行给出N个非负整数，即这N位学生的成绩，其间以空格分隔。</p>
+<h3 id="输出格式">
+  输出格式:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>按照以下格式输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">caverage <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">成绩均值</span>
+count <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">及格人数</span>
+</code></pre></div><p>其中平均值精确到小数点后一位。</p>
+<h3 id="输入样例">
+  输入样例:
+  <a class="heading-link" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ae81ff">5</span>
+<span style="color:#ae81ff">77</span> <span style="color:#ae81ff">54</span> <span style="color:#ae81ff">92</span> <span style="color:#ae81ff">73</span> <span style="color:#ae81ff">60</span>
+</code></pre></div><h3 id="输出样例">
+  输出样例:
+  <a class="heading-link" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">average <span style="color:#f92672">=</span> <span style="color:#ae81ff">71.2</span>
+count <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</code></pre></div><hr>
+<h2 id="解题代码">
+  解题代码：
+  <a class="heading-link" href="#%e8%a7%a3%e9%a2%98%e4%bb%a3%e7%a0%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  <span style="color:#66d9ef">int</span> n;
+  scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>n);
+  <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>){
+  	<span style="color:#75715e">//判断输入是否为0人
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>){
+    printf(<span style="color:#e6db74">&#34;average = 0.0</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+    printf(<span style="color:#e6db74">&#34;count = 0&#34;</span>);
+
+	}
+    <span style="color:#66d9ef">else</span>{
+ 	<span style="color:#66d9ef">int</span> i;
+	<span style="color:#66d9ef">int</span> sum<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">int</span> temp<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+  {
+    <span style="color:#66d9ef">int</span> t;
+    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>t);
+    sum<span style="color:#f92672">+=</span>t;
+    <span style="color:#66d9ef">if</span>(t<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">60</span>) temp<span style="color:#f92672">++</span>;
+  }
+  printf(<span style="color:#e6db74">&#34;average = %.1lf</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#ae81ff">1.0</span><span style="color:#f92672">*</span>sum<span style="color:#f92672">/</span>n);
+  printf(<span style="color:#e6db74">&#34;count = %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,temp);}}
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+
+</code></pre></div>
+  </article>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Tc_Shi's Personal Blog.</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Tc_Shi 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.f92783b4545b68f3523e5d6ad91d93f76818f9d0db2ffa13bda31b6119cde62b.js" integrity="sha256-&#43;SeDtFRbaPNSPl1q2R2T92gY&#43;dDbL/oTvaMbYRnN5is="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
