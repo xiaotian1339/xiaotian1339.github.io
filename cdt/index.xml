@@ -6,7 +6,23 @@
     <description>Recent content in Cdts on Tcgg&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 29 Apr 2021 03:33:18 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/cdt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 04:19:27 -0400</lastBuildDate><atom:link href="https://xiaotian1339.github.io/cdt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C程序设计实用教程P36{5}（2）的问题</title>
+      <link>https://xiaotian1339.github.io/cdt/problem1/</link>
+      <pubDate>Fri, 30 Apr 2021 04:19:27 -0400</pubDate>
+      
+      <guid>https://xiaotian1339.github.io/cdt/problem1/</guid>
+      <description>例如这个代码：
+#include&amp;lt;stdio.h&amp;gt;void main() { char c1,c2; c1 = 197; c2 = 198; printf(&amp;#34;c1 = %c,c2 = %c\n&amp;#34;,c1,c2 ); printf(&amp;#34;c1 = %d,c2 = %d&amp;#34;,c1,c2); return; } 返回的是
+c1 = ?c2 = ? c1 = -59,c2 = -58  对于第一行C1 = ？ C2 = ？
+%c问号的原因是因为找不到对应的ASCII字符。可以转变终端编码显示！
+ 第二行输出负数的问题：
+这是一个简单而又复杂的问题。
+首先， %c 和 %d 都要求对应的变参是 int 类型。唯一不同的是，%c 是将这个 int 类型的变参转换为 unsigned char 类型的字符，然后予以显示，而 %d 则是将它转换为有符号十进制格式的数字字符予以显示。
+其次，程序是没有问题的。尽管传入的变参是 char 类型的，但依照默认实参转换（default argument conversion）的规则，它是被转换为 int 类型之后传递给 printf 的。</description>
+    </item>
+    
     <item>
       <title>C练习1</title>
       <link>https://xiaotian1339.github.io/cdt/ctest1/</link>

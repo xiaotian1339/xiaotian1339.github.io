@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="color-scheme" content="light dark">
+
+    
+
+    <meta name="author" content="Tc_Shi">
+    <meta name="description" content="例如这个代码：
+#include&lt;stdio.h&gt;void main() { char c1,c2; c1 = 197; c2 = 198; printf(&#34;c1 = %c,c2 = %c\n&#34;,c1,c2 ); printf(&#34;c1 = %d,c2 = %d&#34;,c1,c2); return; } 返回的是
+c1 = ?c2 = ? c1 = -59,c2 = -58  对于第一行C1 = ？ C2 = ？
+%c问号的原因是因为找不到对应的ASCII字符。可以转变终端编码显示！
+ 第二行输出负数的问题：
+这是一个简单而又复杂的问题。
+首先， %c 和 %d 都要求对应的变参是 int 类型。唯一不同的是，%c 是将这个 int 类型的变参转换为 unsigned char 类型的字符，然后予以显示，而 %d 则是将它转换为有符号十进制格式的数字字符予以显示。
+其次，程序是没有问题的。尽管传入的变参是 char 类型的，但依照默认实参转换（default argument conversion）的规则，它是被转换为 int 类型之后传递给 printf 的。">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C程序设计实用教程P36{5}（2）的问题"/>
+<meta name="twitter:description" content="例如这个代码：
+#include&lt;stdio.h&gt;void main() { char c1,c2; c1 = 197; c2 = 198; printf(&#34;c1 = %c,c2 = %c\n&#34;,c1,c2 ); printf(&#34;c1 = %d,c2 = %d&#34;,c1,c2); return; } 返回的是
+c1 = ?c2 = ? c1 = -59,c2 = -58  对于第一行C1 = ？ C2 = ？
+%c问号的原因是因为找不到对应的ASCII字符。可以转变终端编码显示！
+ 第二行输出负数的问题：
+这是一个简单而又复杂的问题。
+首先， %c 和 %d 都要求对应的变参是 int 类型。唯一不同的是，%c 是将这个 int 类型的变参转换为 unsigned char 类型的字符，然后予以显示，而 %d 则是将它转换为有符号十进制格式的数字字符予以显示。
+其次，程序是没有问题的。尽管传入的变参是 char 类型的，但依照默认实参转换（default argument conversion）的规则，它是被转换为 int 类型之后传递给 printf 的。"/>
+
+    <meta property="og:title" content="C程序设计实用教程P36{5}（2）的问题" />
+<meta property="og:description" content="例如这个代码：
+#include&lt;stdio.h&gt;void main() { char c1,c2; c1 = 197; c2 = 198; printf(&#34;c1 = %c,c2 = %c\n&#34;,c1,c2 ); printf(&#34;c1 = %d,c2 = %d&#34;,c1,c2); return; } 返回的是
+c1 = ?c2 = ? c1 = -59,c2 = -58  对于第一行C1 = ？ C2 = ？
+%c问号的原因是因为找不到对应的ASCII字符。可以转变终端编码显示！
+ 第二行输出负数的问题：
+这是一个简单而又复杂的问题。
+首先， %c 和 %d 都要求对应的变参是 int 类型。唯一不同的是，%c 是将这个 int 类型的变参转换为 unsigned char 类型的字符，然后予以显示，而 %d 则是将它转换为有符号十进制格式的数字字符予以显示。
+其次，程序是没有问题的。尽管传入的变参是 char 类型的，但依照默认实参转换（default argument conversion）的规则，它是被转换为 int 类型之后传递给 printf 的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiaotian1339.github.io/cdt/problem1/" />
+<meta property="article:published_time" content="2021-04-30T04:19:27-04:00" />
+<meta property="article:modified_time" content="2021-04-30T04:19:27-04:00" />
+
+
+    <title>
+  C程序设计实用教程P36{5}（2）的问题 · Tcgg&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="https://xiaotian1339.github.io/cdt/problem1/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.1.7" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.dde8a61eb31a32353b4baf3d9113f03c4ea2a8ca9bb736f59ca2d2b2cb664f0b.css" integrity="sha256-3eimHrMaMjU7S689kRPwPE6iqMqbtzb1nKLSsstmTws=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/ico-13.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script defer src="https://twemoji.maxcdn.com/v/13.0.2/twemoji.min.js"
+        integrity="sha384-wyB/MspSJ/r2bT2kCj44qtsYRYlpzO2oAPhRj5myrWD63dt6qWv4x8AZe7Fl3K3b" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.80.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Tcgg&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">主页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">博客总览</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/baogao/">上机报告</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/dh/">导航</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/game/">Fun</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/cdt/">C实例</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于我</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://xiaotian1339.github.io/cdt/problem1/">
+          C程序设计实用教程P36{5}（2）的问题
+        </a>
+      </h1>
+    </header>
+
+    <p>例如这个代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">char</span> c1,c2;
+    c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">197</span>;
+    c2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">198</span>;
+    printf(<span style="color:#e6db74">&#34;c1 = %c,c2 = %c</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,c1,c2 );
+    printf(<span style="color:#e6db74">&#34;c1 = %d,c2 = %d&#34;</span>,c1,c2);
+    <span style="color:#66d9ef">return</span>;
+}
+</code></pre></div><p>返回的是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">c1 <span style="color:#f92672">=</span> <span style="color:#f92672">?</span>c2 <span style="color:#f92672">=</span> <span style="color:#f92672">?</span>
+c1 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">59</span>,c2 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">58</span>
+</code></pre></div><hr>
+<p>对于第一行C1 = ？ C2 = ？</p>
+<p>%c问号的原因是因为找不到对应的ASCII字符。可以转变终端编码显示！</p>
+<hr>
+<p>第二行输出负数的问题：</p>
+<p>这是一个简单而又复杂的问题。</p>
+<p>首先， %c 和 %d 都要求对应的变参是 int 类型。唯一不同的是，%c 是将这个 int 类型的变参转换为 unsigned char 类型的字符，然后予以显示，而 %d 则是将它转换为有符号十进制格式的数字字符予以显示。</p>
+<p>其次，程序是没有问题的。尽管传入的变参是 char 类型的，但依照默认实参转换（default argument conversion）的规则，它是被转换为 int 类型之后传递给 printf 的。</p>
+<p>最后，对于 printf 来说， %c 是将传入的值按 int 类型（的长度）取出，然后转换（缩小）为 unsigned char 类型（的长度），将它视为字符编码，然后打印这个字符； %d 是将传入的值按 int 类型（的长度）取出，拆分数位并转换为有符号十进制数字字符打印输出。这里的关键是， %d 要求这个转换过程必须区分数值的正负。这很好办，只需要判断其二进制形式的最高位（符号位）就可以了：为0是正数，为1是负数。然而，在197和198这两个数值的二进制形式中，符号位似乎并不是1。这就回到了开始：在将 char 类型的值转换为 int 类型并传递给 printf 时，是如何转换的？再往前，两个常量197和198的类型都是 int ，将它们赋给变量 c1 和 c2 时，需要从 int 转换为 char ，这个转换过程又是怎样的？</p>
+<p>这就涉及到数值转换规则。首先，将一个整数类型的值转换为另一个除_Bool之外的整数类型时，如果这个值能够用新类型来表示，则转换后的值不变。</p>
+<p>来看</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span> c1, c2;
+c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">197</span>;
+c2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">198</span>;
+</code></pre></div><p>在这里，如果 char 等价于 unsigned char ，那么，在主流的机器上，它可以表示的数值范围是 0到255，所以能够容纳，且 printf 不可能打印两个负值。显然，在楼主的环境下，char实际上是signed char。在主流的机器上，它可以表示的数值范围是-127到+128，故无法表示 197 和 198 ，需要转换。</p>
+<p>但是，如果新类型是有符号的并且无法表示这个值，转换的结果要依赖于具体的编译器，甚至可能触发信号机制。即，C语言没有规定如何转换。</p>
+<p>在很多平台上（显然包括楼主所在的机器环境），是直接把长度为 int 的 197 截断为 char 类型的长度。所以，最终它表示有符号数-59。</p>
+<hr>
+
+  </article>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Tc_Shi's Personal Blog.</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Tc_Shi 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.f92783b4545b68f3523e5d6ad91d93f76818f9d0db2ffa13bda31b6119cde62b.js" integrity="sha256-&#43;SeDtFRbaPNSPl1q2R2T92gY&#43;dDbL/oTvaMbYRnN5is="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
