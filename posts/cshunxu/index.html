@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="color-scheme" content="light dark">
+
+    
+
+    <meta name="author" content="Tc_Shi">
+    <meta name="description" content="在C&#43;&#43;里，表达式求值顺序一直是一个大坑，这是由于为了给编译器更大的优化空间，C&#43;&#43;对表达式的求值做了许多非常灵活的规定（其实就是不规定，编译器愿意怎么实现都可以）。这些灵活的规定也给C&#43;&#43;带来了许多在其它语言中不存在的未定义行为（undefined behavior），比如i=i&#43;&#43;，甚至有一些是标准委员会都没有预想到。
+在C&#43;&#43;03里，表达式的求值顺序依靠序列点（sequency point）来定义。有关序列点的介绍，在 这里 和 这里 可以见到。但是其中也提到了序列点所存在的一些问题。到了C&#43;&#43;11，标准委员会放弃了序列点，而使用了一种新的方式定义表达的求值顺序。两种定义的结果大同小异，这里使用C&#43;&#43;11的定义方式，介绍一下C&#43;&#43;中的表达式求值。
+C&#43;&#43;11中还引入线程的概念，不过这里讨论的是同一线程中表达式的求值顺序，不讨论不同线程之间的顺序与同步的问题。
+一些定义    side effect 副作用    访问（读或写）volatile的变量，修改一个对象（变量），调用系统I/O函数，或调用会发生以上三种行为函数，统称为副作用。对表达式的求值，不只包括求出表达式值（即返回值，value computation），还包括完成表达式中的包含的各种副作为。
+如
+int i=1; i&#43;&#43;; // 对其求值包括两部分，计算返回值（1），以及其副作用（将i赋值为2）
+full-expression 完整表达式    一个完整式指不是其它表达式子表达式的表达式。
+一个表达式可以包含子表达式，也可以成为其它表达式的一部分，如(y=i&#43;1)!=0; 中，y=i&#43;1 包含子表达式 i&#43;1 ,同时它是整个表达式(y=i&#43;1)!=0的一个子表达式。在这里(y=i&#43;1)!=0就是一个完整表达式。
+一个完整表达式包括根据表达式所在上下文成生成类型转换，以及临时变量的析构。
+struct S { S(int i): I(i) { } int&amp; v() { return I; } private: int I; }; void f() { if (S(3).v()) // if 内部部分构成一个完整表达式。  // 在函数求值后的左值到右值的转换(int&amp; --&gt; int)，以及 int --&gt; bool 的转换（由于其出现在if条件判断中，所以需要转换为 bool)，  // 以及S(3)临时变量的析构都是这一完整表达式的一部分。  { } } 完整表达式还会包含一些表面上没有出现在这个表达式中的内容，如函数调用表达式中，默认参数的计算是完整表达式的一部分，虽然默认参数并不出现在这个表达式中。">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; - 表达式求值顺序"/>
+<meta name="twitter:description" content="在C&#43;&#43;里，表达式求值顺序一直是一个大坑，这是由于为了给编译器更大的优化空间，C&#43;&#43;对表达式的求值做了许多非常灵活的规定（其实就是不规定，编译器愿意怎么实现都可以）。这些灵活的规定也给C&#43;&#43;带来了许多在其它语言中不存在的未定义行为（undefined behavior），比如i=i&#43;&#43;，甚至有一些是标准委员会都没有预想到。
+在C&#43;&#43;03里，表达式的求值顺序依靠序列点（sequency point）来定义。有关序列点的介绍，在 这里 和 这里 可以见到。但是其中也提到了序列点所存在的一些问题。到了C&#43;&#43;11，标准委员会放弃了序列点，而使用了一种新的方式定义表达的求值顺序。两种定义的结果大同小异，这里使用C&#43;&#43;11的定义方式，介绍一下C&#43;&#43;中的表达式求值。
+C&#43;&#43;11中还引入线程的概念，不过这里讨论的是同一线程中表达式的求值顺序，不讨论不同线程之间的顺序与同步的问题。
+一些定义    side effect 副作用    访问（读或写）volatile的变量，修改一个对象（变量），调用系统I/O函数，或调用会发生以上三种行为函数，统称为副作用。对表达式的求值，不只包括求出表达式值（即返回值，value computation），还包括完成表达式中的包含的各种副作为。
+如
+int i=1; i&#43;&#43;; // 对其求值包括两部分，计算返回值（1），以及其副作用（将i赋值为2）
+full-expression 完整表达式    一个完整式指不是其它表达式子表达式的表达式。
+一个表达式可以包含子表达式，也可以成为其它表达式的一部分，如(y=i&#43;1)!=0; 中，y=i&#43;1 包含子表达式 i&#43;1 ,同时它是整个表达式(y=i&#43;1)!=0的一个子表达式。在这里(y=i&#43;1)!=0就是一个完整表达式。
+一个完整表达式包括根据表达式所在上下文成生成类型转换，以及临时变量的析构。
+struct S { S(int i): I(i) { } int&amp; v() { return I; } private: int I; }; void f() { if (S(3).v()) // if 内部部分构成一个完整表达式。  // 在函数求值后的左值到右值的转换(int&amp; --&gt; int)，以及 int --&gt; bool 的转换（由于其出现在if条件判断中，所以需要转换为 bool)，  // 以及S(3)临时变量的析构都是这一完整表达式的一部分。  { } } 完整表达式还会包含一些表面上没有出现在这个表达式中的内容，如函数调用表达式中，默认参数的计算是完整表达式的一部分，虽然默认参数并不出现在这个表达式中。"/>
+
+    <meta property="og:title" content="C&#43;&#43; - 表达式求值顺序" />
+<meta property="og:description" content="在C&#43;&#43;里，表达式求值顺序一直是一个大坑，这是由于为了给编译器更大的优化空间，C&#43;&#43;对表达式的求值做了许多非常灵活的规定（其实就是不规定，编译器愿意怎么实现都可以）。这些灵活的规定也给C&#43;&#43;带来了许多在其它语言中不存在的未定义行为（undefined behavior），比如i=i&#43;&#43;，甚至有一些是标准委员会都没有预想到。
+在C&#43;&#43;03里，表达式的求值顺序依靠序列点（sequency point）来定义。有关序列点的介绍，在 这里 和 这里 可以见到。但是其中也提到了序列点所存在的一些问题。到了C&#43;&#43;11，标准委员会放弃了序列点，而使用了一种新的方式定义表达的求值顺序。两种定义的结果大同小异，这里使用C&#43;&#43;11的定义方式，介绍一下C&#43;&#43;中的表达式求值。
+C&#43;&#43;11中还引入线程的概念，不过这里讨论的是同一线程中表达式的求值顺序，不讨论不同线程之间的顺序与同步的问题。
+一些定义    side effect 副作用    访问（读或写）volatile的变量，修改一个对象（变量），调用系统I/O函数，或调用会发生以上三种行为函数，统称为副作用。对表达式的求值，不只包括求出表达式值（即返回值，value computation），还包括完成表达式中的包含的各种副作为。
+如
+int i=1; i&#43;&#43;; // 对其求值包括两部分，计算返回值（1），以及其副作用（将i赋值为2）
+full-expression 完整表达式    一个完整式指不是其它表达式子表达式的表达式。
+一个表达式可以包含子表达式，也可以成为其它表达式的一部分，如(y=i&#43;1)!=0; 中，y=i&#43;1 包含子表达式 i&#43;1 ,同时它是整个表达式(y=i&#43;1)!=0的一个子表达式。在这里(y=i&#43;1)!=0就是一个完整表达式。
+一个完整表达式包括根据表达式所在上下文成生成类型转换，以及临时变量的析构。
+struct S { S(int i): I(i) { } int&amp; v() { return I; } private: int I; }; void f() { if (S(3).v()) // if 内部部分构成一个完整表达式。  // 在函数求值后的左值到右值的转换(int&amp; --&gt; int)，以及 int --&gt; bool 的转换（由于其出现在if条件判断中，所以需要转换为 bool)，  // 以及S(3)临时变量的析构都是这一完整表达式的一部分。  { } } 完整表达式还会包含一些表面上没有出现在这个表达式中的内容，如函数调用表达式中，默认参数的计算是完整表达式的一部分，虽然默认参数并不出现在这个表达式中。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiaotian1339.github.io/posts/cshunxu/" />
+<meta property="article:published_time" content="2021-05-06T21:22:14-04:00" />
+<meta property="article:modified_time" content="2021-05-06T21:22:14-04:00" />
+
+
+    <title>
+  C&#43;&#43; - 表达式求值顺序 · Tcgg&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="https://xiaotian1339.github.io/posts/cshunxu/">
+    
+
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.1.7" as="font" type="font/woff2" crossorigin>
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.dde8a61eb31a32353b4baf3d9113f03c4ea2a8ca9bb736f59ca2d2b2cb664f0b.css" integrity="sha256-3eimHrMaMjU7S689kRPwPE6iqMqbtzb1nKLSsstmTws=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/ico-13.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script defer src="https://twemoji.maxcdn.com/v/13.0.2/twemoji.min.js"
+        integrity="sha384-wyB/MspSJ/r2bT2kCj44qtsYRYlpzO2oAPhRj5myrWD63dt6qWv4x8AZe7Fl3K3b" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.80.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="preload-transitions colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Tcgg&#39;s Blog
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">主页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">博客总览</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/baogao/">上机报告</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/dh/">导航</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/game/">Fun</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/cdt/">C实例</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于我</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://xiaotian1339.github.io/posts/cshunxu/">
+              C&#43;&#43; - 表达式求值顺序
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime='2021-05-06T21:22:14-04:00'>
+                May 6, 2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div>
+        
+        <p>在C++里，表达式求值顺序一直是一个大坑，这是由于为了给编译器更大的优化空间，C++对表达式的求值做了许多非常灵活的规定（其实就是不规定，编译器愿意怎么实现都可以）。这些灵活的规定也给C++带来了许多在其它语言中不存在的未定义行为（undefined behavior），比如i=i++，甚至有一些是标准委员会都没有预想到。</p>
+<p>在C++03里，表达式的求值顺序依靠序列点（sequency point）来定义。有关序列点的介绍，在 这里 和 这里 可以见到。但是其中也提到了序列点所存在的一些问题。到了C++11，标准委员会放弃了序列点，而使用了一种新的方式定义表达的求值顺序。两种定义的结果大同小异，这里使用C++11的定义方式，介绍一下C++中的表达式求值。</p>
+<p>C++11中还引入线程的概念，不过这里讨论的是同一线程中表达式的求值顺序，不讨论不同线程之间的顺序与同步的问题。</p>
+<h2 id="一些定义">
+  一些定义
+  <a class="heading-link" href="#%e4%b8%80%e4%ba%9b%e5%ae%9a%e4%b9%89">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="side-effect-副作用">
+  side effect 副作用
+  <a class="heading-link" href="#side-effect-%e5%89%af%e4%bd%9c%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>访问（读或写）volatile的变量，修改一个对象（变量），调用系统I/O函数，或调用会发生以上三种行为函数，统称为副作用。对表达式的求值，不只包括求出表达式值（即返回值，value computation），还包括完成表达式中的包含的各种副作为。</p>
+<p>如</p>
+<p>int i=1;
+i++; // 对其求值包括两部分，计算返回值（1），以及其副作用（将i赋值为2）</p>
+<h3 id="full-expression-完整表达式">
+  full-expression 完整表达式
+  <a class="heading-link" href="#full-expression-%e5%ae%8c%e6%95%b4%e8%a1%a8%e8%be%be%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>一个完整式指不是其它表达式子表达式的表达式。</p>
+<p>一个表达式可以包含子表达式，也可以成为其它表达式的一部分，如(y=i+1)!=0; 中，y=i+1 包含子表达式 i+1 ,同时它是整个表达式(y=i+1)!=0的一个子表达式。在这里(y=i+1)!=0就是一个完整表达式。</p>
+<p>一个完整表达式包括根据表达式所在上下文成生成类型转换，以及临时变量的析构。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> S {
+S(<span style="color:#66d9ef">int</span> i)<span style="color:#f92672">:</span> I(i) { }
+  <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> v() { <span style="color:#66d9ef">return</span> I; }
+private:
+  <span style="color:#66d9ef">int</span> I;
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {
+  <span style="color:#66d9ef">if</span> (S(<span style="color:#ae81ff">3</span>).v()) <span style="color:#75715e">// if 内部部分构成一个完整表达式。
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// 在函数求值后的左值到右值的转换(int&amp; --&gt; int)，以及 int --&gt; bool 的转换（由于其出现在if条件判断中，所以需要转换为 bool)，
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// 以及S(3)临时变量的析构都是这一完整表达式的一部分。
+</span><span style="color:#75715e"></span>  { }
+}
+</code></pre></div><p>完整表达式还会包含一些表面上没有出现在这个表达式中的内容，如函数调用表达式中，默认参数的计算是完整表达式的一部分，虽然默认参数并不出现在这个表达式中。</p>
+<h3 id="undefined-behavior-未定义行为">
+  undefined behavior 未定义行为
+  <a class="heading-link" href="#undefined-behavior-%e6%9c%aa%e5%ae%9a%e4%b9%89%e8%a1%8c%e4%b8%ba">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>标准不对程序的结果作为任何规定，程序可以出现任何结果（包括程序异常中止）。同时，程序的两次运行可以出现不同的结果。当包括未定义行为时，同一个程序中的相同代码也可能得到不同结果。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+printf(<span style="color:#e6db74">&#34;%d,%d&#34;</span>, i<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>); <span style="color:#75715e">// 这是 C++ 里一个非常著名的考试题，也是一个非常著名的未定义行为，也就是说，它的结果是不确定的。
+</span></code></pre></div><h3 id="c11中关于表达式求值顺序的定义方法">
+  C++11中关于表达式求值顺序的定义方法
+  <a class="heading-link" href="#c11%e4%b8%ad%e5%85%b3%e4%ba%8e%e8%a1%a8%e8%be%be%e5%bc%8f%e6%b1%82%e5%80%bc%e9%a1%ba%e5%ba%8f%e7%9a%84%e5%ae%9a%e4%b9%89%e6%96%b9%e6%b3%95">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>对于两个求值（返回值计算、副作用、也可能两者同时存在）A和B，C++11使用以下一些关系定义A与B的顺序：</p>
+<p>sequenced before ： A先于B。A中的任何计算都先于B中的任何一个计算。即B开始的时候A已经完全结束。</p>
+<p>sequenced after : A后于B。即B先于A。</p>
+<p>unsequenced : 无顺序的。A与B发生的顺序不一定，并有可能交差。即有可能A执行到一半的时候开始B的执行。</p>
+<p>indeterminately sequenced ： 顺序未指定。A先于B 或 B先于A。编译器可以选择任何一个，但是A与B的执行不能交差。</p>
+<p>注意，对于无顺序的(unsequenced)和顺序未指定(indeterminately sequenced)的求值，标准并不要求两次不同求值使用相同的顺序。</p>
+<h2 id="表达式求值顺序">
+  表达式求值顺序
+  <a class="heading-link" href="#%e8%a1%a8%e8%be%be%e5%bc%8f%e6%b1%82%e5%80%bc%e9%a1%ba%e5%ba%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="1">
+  1
+  <a class="heading-link" href="#1">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>一个完整表达式的求值与副作用 先于(sequenced before) 下一个完整表达式的求值与副作用。</p>
+<p>即两个不同的完整表达式的求值之间的顺序是确定的，不会交叉。</p>
+<h3 id="2">
+  2
+  <a class="heading-link" href="#2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>除非有特别说明（见5~10），一个运算符的不同操作数的求值是无顺序的(unsequenced)，一个表达式中的不同子表达式的求值是无顺序的(unsequenced)。</p>
+<p>运算操作数的值计算(value computation)先于(sequenced before)运算符结果的值计算(value computation)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+(i<span style="color:#f92672">+</span>j)<span style="color:#f92672">*</span>(k<span style="color:#f92672">+</span>n<span style="color:#f92672">+</span>j);
+<span style="color:#75715e">// i+j 与 k+n+i 的值计算是无顺序的。编译器可以选择先计算k+n,再计算i+j，然后计算k+n+i。
+</span><span style="color:#75715e">// 但是 i+j 的计算与 k+n+j 的计算都先于两者相乘结果的计算。
+</span></code></pre></div><h3 id="3">
+  3
+  <a class="heading-link" href="#3">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>如果对同一个简单对象（scalar object，比如基本数据类型的变量）的两个不同的副作用是无顺序的，那么这是一个未定义行为。</p>
+<p>如果对一个简单对象的一个副作用与另一个需要此对象值的值计算是无顺序的，那么这是一个未定义行为。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+i<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> i<span style="color:#f92672">++</span>;<span style="color:#75715e">// + 的两个操作数各有一个对 i 的副作用（写 i 的值），但是它们是无顺序的，
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//  因此这是一个未定义行为。（结果不确定）
+</span><span style="color:#75715e"></span>i <span style="color:#f92672">+</span> i<span style="color:#f92672">++</span>; <span style="color:#75715e">// + 的左操作数(i)是一个需要 i 的值计算（即需要计算i的值），右侧(i++)包含一个对 i 的副作用，两者是无顺序的，
+</span><span style="color:#75715e"></span>         <span style="color:#75715e">// 因此这也是一个示定义行为。（结果不确定）
+</span></code></pre></div><h3 id="4">
+  4
+  <a class="heading-link" href="#4">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>函数调用时，任何实参的求值及副作用先于 函数体的任何一条语句及表达式求值。</p>
+<p>函数的不同实参的求值与副作用是无顺序的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+func(i<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>); <span style="color:#75715e">// 未定义行为，函数实参的求值与副作用是无顺序的，而它的两个实参求值各包含一个对 i 的副作用。
+</span></code></pre></div><p>在调用函数中，任何即不先于被调用函数，也不后于被调用函数的求值，它们与被调用函数都是顺序未指定的(indeterminately sequenced)。即，调用函数中的任何求值与被调用函数不交差。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>(<span style="color:#66d9ef">int</span>);
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+(i<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> k) <span style="color:#f92672">+</span> foo(j<span style="color:#f92672">++</span>); <span style="color:#75715e">// i++ + k 与 foo(j++) 是无顺序的，但是i++ + k 中的每一个求值（自增与求和）与foo的函数体的执行是顺序未指定的，
+</span><span style="color:#75715e"></span>                      <span style="color:#75715e">// 即它们不会插入到函数执行中。注意先自增(i++)，再调用函数，最后求（i++ +k）是可能的。
+</span><span style="color:#75715e"></span>(i<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> k) <span style="color:#f92672">+</span> foo(i<span style="color:#f92672">++</span>); <span style="color:#75715e">// i++ + k 与 foo 是函数体是顺序未指定的，但是 i++ + k 与 i++ (foo的实参)的求值仍然是无顺序的，
+</span><span style="color:#75715e"></span>                      <span style="color:#75715e">// 这是一个未定义行为，结果不确定。
+</span></code></pre></div><p>在进行函数体之前，要由实参对形参进行初始化。对同一个函数调用的不同形参的初始化是顺序未指定的（indeterminately sequenced）。</p>
+<p>注意，这里所说的函数调用并不需要显示的函数调用的形式。例如，运算符重载、构造说析构、类型转换等等，都可以在没显示函数调用形式的情况下发生函数调用。</p>
+<h3 id="5-自增自减-i-i---i---i">
+  5 自增自减 i++ i&ndash; ++i &ndash;i
+  <a class="heading-link" href="#5-%e8%87%aa%e5%a2%9e%e8%87%aa%e5%87%8f-i-i---i---i">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>对于后缀形式 i++ i&ndash;</p>
+<p>表达式的值计算(value computation)先于对变量的修改(side effect)
+与其顺序未指定的函数调用不能查入到该值计算与变量修改之间</p>
+<p>对于前缀形式 ++i &ndash;i
+返回被更新之后的操作数。注意返回的不是操作数的值，而是操作数本身，从而他是一个左值。</p>
+<p>当 i 不为 bool 是，++i &ndash;i 分别与 i+=1 i-=1 等价。</p>
+<h3 id="6-operator-new">
+  6 operator new
+  <a class="heading-link" href="#6-operator-new">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>allocator function （内存分配函数）与初始化参数的求值是顺序未指定的。</p>
+<p>对新建的对象初始化先于对new表达式的值计算</p>
+<h3 id="7---逻辑与逻辑或">
+  7 &amp;&amp; || （逻辑与，逻辑或）
+  <a class="heading-link" href="#7---%e9%80%bb%e8%be%91%e4%b8%8e%e9%80%bb%e8%be%91%e6%88%96">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>当 &amp;&amp; 的左操作数值为 false ，或 || 的左操作数值为 true 时， 它们的右操作数不会被求值。</p>
+<p>如果这两个运算符的两个操作数都需要被求值时，左操作数的值计算与副作用 先于 右操作数的值计算与副作用。</p>
+<h3 id="8-">
+  8 ?:
+  <a class="heading-link" href="#8-">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>?: 运算符有三个操作数，其中第二个与第三个操作数只有一个会被求值。当第一个操作数值为 true 时，第二个操作数被求值；当第一个操作数值为 false 时，第三个操作数被求值。</p>
+<p>对第一个操作数的值计算与副作用先于第二个或第三个操作数的求值。</p>
+<h3 id="9-------------赋值运算符">
+  9 = *= /= %= += -= &raquo;= &laquo;= &amp;= ^= |= （赋值运算符）
+  <a class="heading-link" href="#9-------------%e8%b5%8b%e5%80%bc%e8%bf%90%e7%ae%97%e7%ac%a6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>赋值操作后于其左右操作数的值计算(value computation)，先与赋值操作，同时赋值操作先于赋值表达式的值计算。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">i <span style="color:#f92672">=</span> i<span style="color:#f92672">++</span> <span style="color:#75715e">// 未定义成为。赋值操作（对 i 的一个副作用）后于 i++ 的值计算。
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 但是，i++ 中对 i 的副作用与赋值操作（对 i 的另一个副作用）是无顺序的，因而这是一个未定义成为。
+</span></code></pre></div><p>注意赋值表达式返回他的左操作数的一个左值。求值顺序个规定保证这个被返回的左操作数是已经被赋值过的。
+对复合赋值运算符 E1 op= E2 ，其求值包括 计算 E1 op E2 ，将结果赋值给 E1 ，返回 E1 。任何函数调用不能插入以上步骤中。</p>
+<h3 id="10--逗号运算符">
+  10 ， （逗号运算符）
+  <a class="heading-link" href="#10--%e9%80%97%e5%8f%b7%e8%bf%90%e7%ae%97%e7%ac%a6">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>左操作数的值会被丢弃。</p>
+<p>左操作数的值计算与副作用 先于 右操作数的值计算与副作用。</p>
+<p>注意 “,” 还会被用于分隔，要区分其与逗号运算符的不同。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+func((i<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>), <span style="color:#ae81ff">2</span>); <span style="color:#75715e">// 逗号表达式, 调用 func(1,2)，i 的值变为 2
+</span><span style="color:#75715e"></span>func(i<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>); <span style="color:#75715e">// 未定义行为，“，”用于分隔不同的实参，两个 i++ 是无顺序的。
+</span></code></pre></div><p>注意，被重载的逗号运算符实际将生成一个函数调用，对其操作数的求值遵循函数实参求值的规定，即不同操作数求值之间是无顺序。</p>
+<h3 id="11-序列初始化">
+  11 序列初始化
+  <a class="heading-link" href="#11-%e5%ba%8f%e5%88%97%e5%88%9d%e5%a7%8b%e5%8c%96">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
+<p>C++11新引入的一种初始化语法。</p>
+<p>在序列初始化中，{} 中可以存在多个初始化参数的求值。每个初始化参数的值计算与副作用先于被逗号分隔的后一个初始化参数的值计算与副作用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec{i<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>}; <span style="color:#75715e">// OK 第一个 i++ 先于 第二个 i++ 的求值， i 变化 2 , vec 为包含两个元素（0，1）的vector。
+</span></code></pre></div><h4 id="注意与逗号表达式不同这里的顺序的强制的即使这个初始化引起了一个函数调用而列表的每一个值作为函数的参数这些求值之间的顺序依然会被保持">
+  注意与逗号表达式不同，这里的顺序的强制的，即使这个初始化引起了一个函数调用，而列表的每一个值作为函数的参数，这些求值之间的顺序依然会被保持。
+  <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e4%b8%8e%e9%80%97%e5%8f%b7%e8%a1%a8%e8%be%be%e5%bc%8f%e4%b8%8d%e5%90%8c%e8%bf%99%e9%87%8c%e7%9a%84%e9%a1%ba%e5%ba%8f%e7%9a%84%e5%bc%ba%e5%88%b6%e7%9a%84%e5%8d%b3%e4%bd%bf%e8%bf%99%e4%b8%aa%e5%88%9d%e5%a7%8b%e5%8c%96%e5%bc%95%e8%b5%b7%e4%ba%86%e4%b8%80%e4%b8%aa%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8%e8%80%8c%e5%88%97%e8%a1%a8%e7%9a%84%e6%af%8f%e4%b8%80%e4%b8%aa%e5%80%bc%e4%bd%9c%e4%b8%ba%e5%87%bd%e6%95%b0%e7%9a%84%e5%8f%82%e6%95%b0%e8%bf%99%e4%ba%9b%e6%b1%82%e5%80%bc%e4%b9%8b%e9%97%b4%e7%9a%84%e9%a1%ba%e5%ba%8f%e4%be%9d%e7%84%b6%e4%bc%9a%e8%a2%ab%e4%bf%9d%e6%8c%81">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h4>
+<hr>
+<p>​																																																														@XiaoTian</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>Tc_Shi's Personal Blog.</p>
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         Tc_Shi 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+      <script src="/js/coder.min.f92783b4545b68f3523e5d6ad91d93f76818f9d0db2ffa13bda31b6119cde62b.js" integrity="sha256-&#43;SeDtFRbaPNSPl1q2R2T92gY&#43;dDbL/oTvaMbYRnN5is="></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </body>
+
+</html>
